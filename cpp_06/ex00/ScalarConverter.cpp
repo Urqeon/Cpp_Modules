@@ -44,18 +44,19 @@ bool isNan(float value)
 bool isValidInt(const std::string value) 
 {
     bool hasDecimalPoint = false;
-    for (size_t i = 0; i < value.length(); ++i) {
-        if (!std::isdigit(value[i]))
-		{
-            if (value[i] == '.' && !hasDecimalPoint)
-            	hasDecimalPoint = true;
-			else if (value[i] == 'f' && (i == value.length()-1))
-				return true;
-            else if (!(i == 0 && (value[i] == '+' || value[i] == '-'))) 
-            	return false;  
-        }
+    for (size_t i = 0; i < value.length(); ++i)
+    {
+	    if (!std::isdigit(value[i]))
+	    {
+		    if (value[i] == '.' && !hasDecimalPoint)
+			    hasDecimalPoint = true;
+		    else if (value[i] == 'f' && (i == value.length()-1))
+			    return true;
+		    else if (!(i == 0 && (value[i] == '+' || value[i] == '-'))) 
+			    return false;
+	    }
     }
-    return true;
+	return true;
 }
 
 void ScalarConverter::convert(std::string value)
