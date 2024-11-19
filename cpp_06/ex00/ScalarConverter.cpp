@@ -45,18 +45,18 @@ bool isValidInt(const std::string value)
 {
     bool hasDecimalPoint = false;
     for (size_t i = 0; i < value.length(); ++i)
-    {
-	    if (!std::isdigit(value[i]))
-	    {
-		    if (value[i] == '.' && !hasDecimalPoint)
-			    hasDecimalPoint = true;
-		    else if (value[i] == 'f' && (i == value.length()-1))
-			    return true;
-		    else if (!(i == 0 && (value[i] == '+' || value[i] == '-'))) 
-			    return false;
-	    }
+	{
+		if (!std::isdigit(value[i]))
+		{
+			if (value[i] == '.' && !hasDecimalPoint)
+            	hasDecimalPoint = true;
+			else if (value[i] == 'f' && (i == value.length()-1))
+				return true;
+            else if (!(i == 0 && (value[i] == '+' || value[i] == '-'))) 
+            	return false;  
+        }
     }
-	return true;
+    return true;
 }
 
 void ScalarConverter::convert(std::string value)
@@ -106,7 +106,7 @@ void ScalarConverter::convert(std::string value)
         			std::cout << "Double: +inf" << std::endl;
 				}
 			}
-			else if(value[value.length() - 1] == 'f')
+			else if(value[value.length() - 1] == 'f' && isdigit(toInt(value)))
 			{
 				if (toFloat(value) - toInt(value) == 0)
 				{
@@ -128,7 +128,7 @@ void ScalarConverter::convert(std::string value)
 	}
     else if (toFloat(value) - toInt(value) == 0)
 	{
-		if(value.length() == 1 && (value[0] == '.' || value[0] == '+' || value[0] == '-'))
+		if(value.length() == 1 && (value[0] == '.' || value[0] == '+' || value[0] == '-' || value[0] == 'f'))
 		{
 			std::cout << "float: "<< static_cast<int>(value[0])  << "f" << std::endl;
 			std::cout << "double: "<< static_cast<int>(value[0]) << ".0" << std::endl;
